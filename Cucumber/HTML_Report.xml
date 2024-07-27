@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="82.442" tests="9" skipped="0" failures="0" errors="0">
+<testcase classname="First Test" name="Opening a webpage using Selenium" time="14.429">
+<system-out><![CDATA[
+Given User is on Google Home Page...........................................passed
+When User types in Cheese and hits ENTER....................................passed
+Then Show how many search results were shown................................passed
+And Close the browser.......................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login Test" name="Testing Login" time="7.016">
+<system-out><![CDATA[
+Given User is on Login page.................................................passed
+When User enters username and password......................................passed
+Then Read the page title and confirmation message...........................passed
+And Close the browser.......................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Testing with Tags" name="Test for Simple Alert" time="10.404">
+<system-out><![CDATA[
+Given User is on the page...................................................passed
+When User clicks the Simple Alert button....................................passed
+Then Alert opens............................................................passed
+And Read the text from it and print it......................................passed
+And Close the alert.........................................................passed
+And Close the browser.......................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Testing with Tags" name="Test for Confirm Alert" time="7.231">
+<system-out><![CDATA[
+Given User is on the page...................................................passed
+When User clicks the Confirm Alert button...................................passed
+Then Alert opens............................................................passed
+And Read the text from it and print it......................................passed
+And Close the alert with Cancel.............................................passed
+And Close the browser.......................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Testing with Tags" name="Test for Prompt Alert" time="6.648">
+<system-out><![CDATA[
+Given User is on the page...................................................passed
+When User clicks the Prompt Alert button....................................passed
+Then Alert opens............................................................passed
+And Read the text from it and print it......................................passed
+And Write a custom message in it............................................passed
+And Close the alert.........................................................passed
+And Close the browser.......................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Data driven test without Example" name="Testing with Data from Scenario" time="12.2">
+<system-out><![CDATA[
+Given User is on Login page.................................................passed
+When User enters "admin" and "password".....................................passed
+Then Read the page title and confirmation message...........................passed
+And Close the browser.......................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Data driven test with Example" name="Testing with Data from Scenario - #1.1" time="10.761">
+<system-out><![CDATA[
+Given User is on Login page.................................................passed
+When User enters "admin" and "password".....................................passed
+Then Read the page title and confirmation message...........................passed
+And Close the browser.......................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Data driven test with Example" name="Testing with Data from Scenario - #1.2" time="6.225">
+<system-out><![CDATA[
+Given User is on Login page.................................................passed
+When User enters "adminUser" and "Password".................................passed
+Then Read the page title and confirmation message...........................passed
+And Close the browser.......................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="feature1" name="Basic test for selenium" time="7.197">
+<system-out><![CDATA[
+Given the user is on the TS homepage........................................passed
+When the user click on homepage.............................................passed
+Then the user is redirected to the About page...............................passed
+]]></system-out>
+</testcase>
+</testsuite>
