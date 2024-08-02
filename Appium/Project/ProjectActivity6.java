@@ -1,8 +1,9 @@
-//Goal: Opening a page on the browser and testing a to-do list page 
+//Goal: Opening a page on the browser and testing a simple login page with correct and incorrect credentials
 
 
 package AppiumProject;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 
@@ -44,22 +45,42 @@ public class ProjectActivity6 {
 	}
 
 	@Test
-	public void LoginTest(){
-	    // Scroll to find the Login Form card and click it
-       driver.findElement(By.xpath("//android.widget.FrameLayout[@contentDesc='Login Form']")).click();
+	public void testCorrectCredentialsPopUpsCard(){
+		  // Scroll to find the Popups card and click it
+        driver.findElement(AppiumBy.xpath("//android.widget.FrameLayout[@contentDesc='Popups']")).click();
+
+        // Find the Sign In button and click it to open the popup with the login form
+        driver.findElement(AppiumBy.xpath("//android.widget.Button[@text='Sign In']")).click();
 
         // Find the username and password input fields and enter the correct credentials
-        WebElement usernameField = driver.findElement(By.xpath("//android.widget.EditText[@resource-id='username']"));
-        usernameField.sendKeys("admin");
-        WebElement passwordField = driver.findElement(By.xpath("//android.widget.EditText[@resource-id='password']"));
-        passwordField.sendKeys("password");
+        driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id='username']")).sendKeys("admin");
+        driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id='password']")).sendKeys("password");
 
         // Click on the Log in button to submit
-        WebElement loginButton = driver.findElement(By.xpath("//android.widget.Button[@text='Log in']"));
-        loginButton.click();
+       driver.findElement(AppiumBy.xpath("//android.widget.Button[@text='Log in']")).click();
 
         // Verify the correct message appears
-        WebElement messageElement = driver.findElement(By.xpath("//android.widget.TextView[@text='You are logged in']"));
+        WebElement messageElement = driver.findElement(AppiumBy.xpath("//android.widget.TextView[@text='You are logged in']"));
         Assert.assertTrue(messageElement.isDisplayed());
     }
+	
+	@Test
+	public void testIncorrectCredentialsPopUpsCard(){
+		  // Scroll to find the Popups card and click it
+      driver.findElement(AppiumBy.xpath("//android.widget.FrameLayout[@contentDesc='Popups']")).click();
+
+      // Find the Sign In button and click it to open the popup with the login form
+      driver.findElement(AppiumBy.xpath("//android.widget.Button[@text='Sign In']")).click();
+
+      // Find the username and password input fields and enter the correct credentials
+      driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id='username']")).sendKeys("wrongusername");
+      driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id='password']")).sendKeys("wrongpassword");
+
+      // Click on the Log in button to submit
+     driver.findElement(AppiumBy.xpath("//android.widget.Button[@text='Log in']")).click();
+
+     // Verify the incorrect message appears
+     WebElement messageElement = driver.findElement(AppiumBy.xpath("//android.widget.TextView[@text='Invalid username or password']"));
+     Assert.assertTrue(messageElement.isDisplayed());
+ }
 }

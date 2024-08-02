@@ -1,4 +1,4 @@
-//Goal: Opening a page on the browser and testing a simple login page with correct credentials
+//Goal: Opening a page on the browser and testing a simple login page with correct & Incorrect credentials
 
 package AppiumProject;
 
@@ -44,7 +44,7 @@ public class ProjectActivity5 {
 	}
 
 	@Test
-	public void LoginTest1(){
+	public void testCorrectCredentialsLoginFormCard(){
 	    // Scroll to find the Login Form card and click it
        driver.findElement(By.xpath("//android.widget.FrameLayout[@contentDesc='Login Form']")).click();
 
@@ -64,19 +64,17 @@ public class ProjectActivity5 {
     }
 	
 	@Test
-	public void LoginTest2(){
+	public void testIncorrectCredentialsLoginFormCard(){
 	    // Scroll to find the Login Form card and click it
        driver.findElement(By.xpath("//android.widget.FrameLayout[@contentDesc='Login Form']")).click();
 
         // Find the username and password input fields and enter the correct credentials
-        WebElement usernameField = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id='username']"));
-        usernameField.sendKeys("wrongadmin");
-        WebElement passwordField = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id='password']"));
-        passwordField.sendKeys("wrongpassword");
+        driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id='username']")).sendKeys("wrongadmin");
+        
+        driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id='password']")).sendKeys("wrongpassword");
 
         // Click on the Log in button to submit
-        WebElement loginButton = driver.findElement(AppiumBy.xpath("//android.widget.Button[@text='Log in']"));
-        loginButton.click();
+        driver.findElement(AppiumBy.xpath("//android.widget.Button[@text='Log in']")).click();
 
         // Verify the incorrect message appears
         WebElement messageElement = driver.findElement(AppiumBy.xpath("//android.widget.TextView[@text='Invalid username or password']"));
