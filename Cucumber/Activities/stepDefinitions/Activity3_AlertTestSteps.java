@@ -7,7 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class AlertTestSteps extends BaseClass{
+public class Activity3_AlertTestSteps extends BaseClass{
 	Alert alert;
 
 	@Given("^User is on the page$")

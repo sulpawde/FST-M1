@@ -7,7 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 
-public class LoginSteps extends BaseClass{
+public class Activity2_Activity4_Activity5_LoginSteps extends BaseClass{
 	
  
     @Given("^User is on Login page$")

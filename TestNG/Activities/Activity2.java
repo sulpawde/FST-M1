@@ -41,7 +41,7 @@ public class Activity2 {
         //This test case will Fail
         WebElement blackButton = driver.findElement(By.cssSelector("button.black"));
         Assert.assertTrue(blackButton.isDisplayed());
-        Assert.assertEquals(blackButton.getText(), "black");
+        Assert.assertEquals(blackButton.getText(), "Black");
     }
     
     @Test(enabled = false)

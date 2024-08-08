@@ -8,7 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class GoogleSearchSteps extends BaseClass {
+public class Activity1_GoogleSearchSteps extends BaseClass {
 
 	@Given("^User is on Google Home Page$")
 	public void userIsOnGooglePage() throws Throwable {
