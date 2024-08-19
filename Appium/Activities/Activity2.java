@@ -1,4 +1,6 @@
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.testng.annotations.AfterClass;
@@ -15,7 +17,7 @@ public class Activity2 {
 
     // Set up method
     @BeforeClass
-    public void setUp() throws MalformedURLException {
+    public void setUp() throws MalformedURLException, URISyntaxException {
         // Desired Capabilities
         UiAutomator2Options options = new UiAutomator2Options();
         options.setPlatformName("android");
@@ -24,14 +26,12 @@ public class Activity2 {
         options.setAppActivity("com.google.android.apps.chrome.Main");
         options.noReset();
 
-        // Server Address
-        URL serverURL = new URL("http://localhost:4723/");
+    	URL serverURL = new URI("http://127.0.0.1:4723").toURL();
 
-        // Driver Initialization
-        driver = new AndroidDriver(serverURL, options);
+		driver = new AndroidDriver(serverURL, options);
 
         // Open the page in Chrome
-        driver.get("https://v1.trainig-support.net");
+        driver.get("https://v1.training-support.net");
     }
 
     // Test method
@@ -39,7 +39,8 @@ public class Activity2 {
     public void chromeTest() {
         // Find heading on the page
         String pageHeading = driver.findElement(AppiumBy.xpath(
-                "//android.view.View[@text='Training Support']"
+                "//android.widget.TextView[@text=\"Training Support\"]"
+        		
         )).getText();
 
         // Print to console
@@ -47,12 +48,12 @@ public class Activity2 {
 
         // Find and click the About Us link
         driver.findElement(AppiumBy.xpath(
-            "//android.view.View[@resource-id='about-link']"
+            "//android.widget.TextView[@text=\"About Us\"]"
         )).click();
 
         // Find heading of new page and print to console
         String aboutPageHeading = driver.findElement(AppiumBy.xpath(
-                "//android.view.View[@text='About Us']"
+                "//android.widget.TextView[@text=\"About Us\"]"
         )).getText();
         System.out.println(aboutPageHeading);
     }

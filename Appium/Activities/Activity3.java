@@ -1,4 +1,6 @@
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.testng.Assert;
@@ -16,7 +18,7 @@ public class Activity3 {
 
     // Set up method
     @BeforeClass
-    public void setUp() throws MalformedURLException {
+    public void setUp() throws MalformedURLException, URISyntaxException {
         // Desired Capabilities
         UiAutomator2Options options = new UiAutomator2Options();
         options.setPlatformName("android");
@@ -28,11 +30,9 @@ public class Activity3 {
         
         options.noReset();
 
-        // Server Address
-        URL serverURL = new URL("http://localhost:4723/");
+    	URL serverURL = new URI("http://127.0.0.1:4723").toURL();
 
-        // Driver Initialization
-        driver = new AndroidDriver(serverURL, options);
+		driver = new AndroidDriver(serverURL, options);
     }
 
     // Test method

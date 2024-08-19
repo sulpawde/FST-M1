@@ -1,4 +1,6 @@
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Duration;
 
@@ -20,7 +22,7 @@ public class Activity4 {
 
     // Set up method
     @BeforeClass
-    public void setUp() throws MalformedURLException {
+    public void setUp() throws MalformedURLException, URISyntaxException {
         // Desired Capabilities
         UiAutomator2Options options = new UiAutomator2Options();
         options.setPlatformName("android");
@@ -29,11 +31,8 @@ public class Activity4 {
         options.setAppActivity(".extensions.GoogleDialtactsActivity");
         options.noReset();
 
-        // Server Address
-        URL serverURL = new URL("http://localhost:4723/");
-
-        // Driver Initialization
-        driver = new AndroidDriver(serverURL, options);
+    	URL serverURL = new URI("http://127.0.0.1:4723").toURL();
+		driver = new AndroidDriver(serverURL, options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
@@ -43,29 +42,53 @@ public class Activity4 {
         // Find and click the add button
         driver.findElement(AppiumBy.xpath("//android.widget.TextView[@resource-id=\"com.google.android.dialer:id/contact_name\" and @text=\"Create new contact\"]")).click();
 
+        
+        // Wait for elements to load
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//android.widget.ImageButton[@content-desc=\"Show detailed name fields\"]")));
+        
+        
+        // Open Name details
+        driver.findElement(AppiumBy.xpath("//android.widget.ImageButton[@content-desc=\"Show detailed name fields\"]")).click();
+
+        
         // Wait for elements to load
         wait.until(ExpectedConditions.elementToBeClickable(
-                AppiumBy.xpath("//android.widget.EditText[@text=\"First name\"]")
+                AppiumBy.id("com.samsung.android.app.contacts:id/firstEdit")
         ));
 
         // Enter the details
-        driver.findElement(AppiumBy.xpath(
-                "//android.widget.EditText[@text='First name']"
+        driver.findElement(AppiumBy.id(
+                "com.samsung.android.app.contacts:id/firstEdit"
         )).sendKeys("Aaditya");
-        driver.findElement(AppiumBy.xpath(
-                "//android.widget.EditText[@text='Last name']"
-        )).sendKeys("Varma");
-        driver.findElement(AppiumBy.xpath(
-                "//android.widget.EditText[@text='Phone']"
-        )).sendKeys("999148292");
+       
+        
+        // Wait for elements to load
+        wait.until(ExpectedConditions.elementToBeClickable(
+                AppiumBy.id("com.samsung.android.app.contacts:id/lastEdit")
+        ));
+        
+        driver.findElement(AppiumBy.id("com.samsung.android.app.contacts:id/lastEdit")).sendKeys("Varma");
+    
+        // Hide name details
+        driver.findElement(AppiumBy.xpath("//android.widget.ImageButton[@content-desc=\"Hide detailed name fields\"]")).click();
+
+        
+        // Wait for elements to load
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//android.widget.LinearLayout[@resource-id=\"com.samsung.android.app.contacts:id/editor_item_frame\"])[2]/android.widget.LinearLayout/android.widget.LinearLayout/android.view.ViewGroup")));
+        
+        driver.findElement(AppiumBy.xpath("(//android.widget.RelativeLayout[@resource-id=\"com.samsung.android.app.contacts:id/titleLayout\"])[1]")).click();
+        	     
+        
+        driver.findElement(AppiumBy.xpath("//android.widget.EditText[@text='Phone']")).sendKeys("999148292");
+   
         // Click Save
-        driver.findElement(AppiumBy.id("com.google.android.contacts:id/menu_save")).click();
+        driver.findElement(AppiumBy.xpath("//android.widget.TextView[@resource-id=\"com.samsung.android.app.contacts:id/navigation_bar_item_small_label_view\" and @text=\"Save\"]")).click();
 
         // Wait for contact to save
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("large_title")));
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.samsung.android.app.contacts:id/header")));
 
         // Assertion
-        String contactName = driver.findElement(AppiumBy.id("large_title")).getText();
+        String contactName = driver.findElement(AppiumBy.id("com.samsung.android.app.contacts:id/header")).getText();
         Assert.assertEquals(contactName, "Aaditya Varma");
     }
 
